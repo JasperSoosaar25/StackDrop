@@ -18,9 +18,6 @@
       "com.jasper.stackdrop.client.StackDropClient"
     ]
   },
-  "mixins": [
-    "stackdrop.mixins.json"
-  ],
   "depends": {
     "fabricloader": ">=0.19.2",
     "fabric-api": "*",
