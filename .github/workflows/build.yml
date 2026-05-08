@@ -22,22 +22,16 @@ jobs:
           java-version: '25'
           distribution: 'temurin'
 
-      - name: Make Gradle wrapper executable
-        run: chmod +x ./gradlew
-
-      # Cache Gradle and Loom downloads so builds are fast after the first run
-      - name: Cache Gradle packages
-        uses: actions/cache@v4
+      # gradle/actions/setup-gradle installs Gradle from gradle-wrapper.properties,
+      # handles the wrapper binary itself, and provides built-in caching —
+      # so there is no need for a committed gradlew binary or a separate cache step.
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
         with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties', '**/gradle.properties') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-
+          gradle-version: wrapper
 
       - name: Build mod
-        run: ./gradlew build --no-daemon
+        run: gradle build --no-daemon
 
       # Upload the built JAR as a workflow artifact
       - name: Upload JAR artifact
