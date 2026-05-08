@@ -1,6 +1,8 @@
 package com.jasper.stackdrop;
 
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
+import net.minecraft.world.item.ItemStack;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,6 +13,16 @@ public class StackDropMod implements ModInitializer {
 
     @Override
     public void onInitialize() {
+        // MODIFY_DROPS fires at drop time and gives us the live List<ItemStack>.
+        // This covers both block breaks and mob kills — no mixin needed.
+        LootTableEvents.MODIFY_DROPS.register((key, lootTable, params, drops) -> {
+            for (ItemStack stack : drops) {
+                if (!stack.isEmpty()) {
+                    stack.setCount(stack.getMaxStackSize());
+                }
+            }
+        });
+
         LOGGER.info("StackDrop loaded — drops are now stacked!");
     }
 }
