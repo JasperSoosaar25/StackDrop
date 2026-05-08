@@ -1,0 +1,11 @@
+{
+  "required": true,
+  "package": "com.jasper.stackdrop.mixin",
+  "compatibilityLevel": "JAVA_25",
+  "mixins": [
+    "LootTableMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
