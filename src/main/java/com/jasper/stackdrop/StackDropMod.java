@@ -13,9 +13,7 @@ public class StackDropMod implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        // MODIFY_DROPS fires at drop time and gives us the live List<ItemStack>.
-        // This covers both block breaks and mob kills — no mixin needed.
-        LootTableEvents.MODIFY_DROPS.register((key, lootTable, params, drops) -> {
+        LootTableEvents.MODIFY_DROPS.register((entry, context, drops) -> {
             for (ItemStack stack : drops) {
                 if (!stack.isEmpty()) {
                     stack.setCount(stack.getMaxStackSize());
