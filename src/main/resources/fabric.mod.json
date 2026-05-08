@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "stackdrop",
+  "version": "${version}",
+  "name": "StackDrop",
+  "description": "Gives you a full stack of every block you mine and every mob you kill.",
+  "authors": [
+    "Jasper"
+  ],
+  "contact": {},
+  "license": "MIT",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.jasper.stackdrop.StackDropMod"
+    ],
+    "client": [
+      "com.jasper.stackdrop.client.StackDropClient"
+    ]
+  },
+  "mixins": [
+    "stackdrop.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.19.2",
+    "fabric-api": "*",
+    "minecraft": "26.1.2"
+  }
+}
